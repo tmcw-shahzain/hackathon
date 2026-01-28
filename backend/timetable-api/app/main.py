@@ -3,6 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import timetable
+from app.routes import students
 from app.db import mongodb_client, mongodb_db, get_db
 import app.db as db_module
 app = FastAPI(
@@ -36,6 +37,7 @@ async def shutdown_db_client():
 
 # Include timetable routes
 app.include_router(timetable.router)
+app.include_router(students.router)
 
 
 @app.get("/")
