@@ -306,17 +306,35 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                {/* Quick Actions */}
+                {/* Tasks */}
                 <div className="bg-card border border-border rounded-lg overflow-hidden">
                   <div className="border-b border-border px-4 py-2.5">
-                    <h2 className="text-base font-bold">Quick Actions</h2>
+                    <h2 className="text-base font-bold">Tasks</h2>
                   </div>
-                  <div className="p-3 flex gap-2">
-                    <button className="flex-1 btn-primary-gold px-3 py-2.5 rounded-lg font-semibold text-xs hover:opacity-90 transition-all hover:-translate-y-0.5">
-                      + New Session
-                    </button>
-                    <button className="flex-1 bg-card border border-primary text-primary px-3 py-2.5 rounded-lg font-semibold text-xs hover:bg-primary/5 transition-colors">
-                      📧 Message
+                  <div className="p-3 space-y-2">
+                    <Link
+                      href="/students/1"
+                      className="block p-3 bg-amber-50 border border-amber-200 rounded-lg hover:shadow-md transition-all hover:-translate-y-0.5"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                          JW
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-semibold text-amber-900 mb-1">
+                            ILP Update Required
+                          </p>
+                          <p className="text-[10px] text-amber-700">
+                            James Wilson's Individual Learning Plan needs updating. Last updated 3 months ago.
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+
+                    <button className="w-full p-3 bg-muted/30 border border-border rounded-lg hover:bg-muted/50 transition-colors text-left">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium text-muted-foreground">+ Add New Task</span>
+                      </div>
                     </button>
                   </div>
                 </div>
