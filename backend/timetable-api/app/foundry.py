@@ -19,7 +19,7 @@ def get_agent(
 
 def call_model(project_name: str, app_name: str, prompt: str):
     agent = get_agent(project_name, app_name)
-    response = agent.chat.completions.create(
-        input="prompt",
+    response = agent.responses.create(
+        input=prompt,
     )
     return response

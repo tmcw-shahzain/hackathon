@@ -6,6 +6,7 @@ from typing import List
 
 router = APIRouter()
 
+
 @router.get("/student")
 async def get_student_by_id(
     studentId: str = Query(..., description="Student ID"),
@@ -23,6 +24,7 @@ async def get_student_by_id(
     # convert ObjectId to str so it can be JSON-serialized like in your timetable example
     student["_id"] = str(student["_id"])
     return student
+
 
 @router.delete("/student/delete")
 async def delete_student_by_id(
@@ -46,8 +48,12 @@ async def delete_student_by_id(
 
 
 class ILP(BaseModel):
-    skills: List[int] = []
-    challenges: List[int] = []
+    q1: str
+    q2: str
+    q3: str
+    q4: str
+    q5: str
+
 
 class Student(BaseModel):
     name: str
@@ -55,24 +61,17 @@ class Student(BaseModel):
     ilp: ILP
     alumni: bool = False
 
+
 @router.post("/student", status_code=status.HTTP_201_CREATED)
 async def create_student(student: Student, db=Depends(get_db)):
-    """
-    Create a student document with this shape:
-    {
-      "name": "mhp",
-      "studentId": "1",
-      "ilp": { "skills": [1,2,3], "challenges": [1,2] },
-      "alumni": false
-    }
-    Returns the inserted document with `_id` as a string.
-    """
     if db is None:
         raise HTTPException(status_code=500, detail="Database not initialized")
 
     existing = await db["student"].find_one({"studentId": student.studentId})
     if existing:
-        raise HTTPException(status_code=400, detail="Student with this studentId already exists")
+        raise HTTPException(
+            status_code=400, detail="Student with this studentId already exists"
+        )
 
     student_doc = student.dict()
     result = await db["student"].insert_one(student_doc)

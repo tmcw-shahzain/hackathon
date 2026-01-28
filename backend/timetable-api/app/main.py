@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.foundry import call_model
 from app.routes import timetable
 from app.routes import students
 from app.db import mongodb_client, mongodb_db, get_db
@@ -43,4 +44,6 @@ app.include_router(students.router)
 @app.get("/")
 async def root():
     """Root endpoint"""
-    return {"message": "hi"}
+    return {
+        "message": call_model("timetable", "timetable-generator-agent", "Hello, world!")
+    }
