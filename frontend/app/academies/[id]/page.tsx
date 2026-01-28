@@ -231,13 +231,13 @@ export default function AcademyDetailPage() {
               </div>
             </div>
             <div className="flex-1 overflow-y-auto p-3">
-              {academy.students.map((student) => (
+              {academy.students.map((student, index) => (
                 <Link
                   key={student.id}
                   href={`/students/${student.id}`}
                   className="flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-muted transition-colors mb-1.5 group"
                 >
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0 avatar-gradient-${(index % 6) + 1}`}>
                     {student.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div className="flex-1 min-w-0">

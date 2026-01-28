@@ -15,62 +15,34 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Users, Calendar, Building2, BarChart3, Search } from "lucide-react"
 import Image from "next/image"
 
 // Mock data
-const academies = [
-  {
-    id: "1",
-    name: "Spring Football Academy",
-    startDate: "Jan 15, 2026",
-    endDate: "Mar 30, 2026",
-    status: "IN PROGRESS" as const,
-    studentCount: 24,
-    location: "North London",
-  },
-  {
-    id: "2",
-    name: "Career Skills Workshop Series",
-    startDate: "Feb 1, 2026",
-    endDate: "Feb 28, 2026",
-    status: "READY" as const,
-    studentCount: 18,
-    location: "Central London",
-  },
-  {
-    id: "3",
-    name: "Summer Sports Camp",
-    startDate: "Jun 1, 2026",
-    endDate: "Aug 31, 2026",
-    status: "WAITING ILP" as const,
-    studentCount: 30,
-    location: "South London",
-  },
-  {
-    id: "4",
-    name: "Autumn Fitness Program",
-    startDate: "Sep 1, 2026",
-    endDate: "Nov 30, 2026",
-    status: "WAITING ILP" as const,
-    studentCount: 20,
-    location: "East London",
-  },
+const students = [
+  { id: "1", name: "James Wilson", performance: "excellent", attendance: "90%", location: "North London" },
+  { id: "2", name: "Sarah Thompson", performance: "good", attendance: "85%", location: "Central London" },
+  { id: "3", name: "Michael Brown", performance: "excellent", attendance: "92%", location: "East London" },
+  { id: "4", name: "Emma Davis", performance: "needs-improvement", attendance: "75%", location: "South London" },
+  { id: "5", name: "David Miller", performance: "good", attendance: "88%", location: "West London" },
+  { id: "6", name: "Olivia Garcia", performance: "excellent", attendance: "95%", location: "North London" },
+  { id: "7", name: "Lucas Martinez", performance: "good", attendance: "83%", location: "Central London" },
+  { id: "8", name: "Sophia Anderson", performance: "excellent", attendance: "91%", location: "East London" },
 ]
 
-const statusConfig = {
-  "IN PROGRESS": "bg-primary/15 text-primary border-primary",
-  "READY": "bg-green-100 text-green-700 border-green-200",
-  "WAITING ILP": "bg-muted-foreground/10 text-muted-foreground border-muted-foreground",
+const performanceConfig = {
+  excellent: { label: "On track", color: "bg-emerald-500/12 text-emerald-700" },
+  good: { label: "Good", color: "bg-blue-500/12 text-blue-700" },
+  "needs-improvement": { label: "Needs support", color: "bg-amber-500/12 text-amber-700" },
+  poor: { label: "At risk", color: "bg-red-500/12 text-red-600" },
 }
 
-export default function AcademiesPage() {
+export default function StudentsPage() {
   const [searchQuery, setSearchQuery] = useState("")
 
-  const filteredAcademies = academies.filter((academy) =>
-    academy.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredStudents = students.filter((student) =>
+    student.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   return (
@@ -127,7 +99,7 @@ export default function AcademiesPage() {
                 Dashboard
               </Link>
               <span className="text-muted-foreground">/</span>
-              <span className="text-sm font-medium">Academies</span>
+              <span className="text-sm font-medium">Students</span>
             </div>
             <div className="flex items-center gap-3">
               <Avatar size="lg" className="size-9 ring-2 ring-border/20">
@@ -140,75 +112,72 @@ export default function AcademiesPage() {
 
         <div className="flex-1 overflow-auto p-6">
           <div className="mb-6">
-            <h1 className="text-2xl font-bold mb-1">Academies</h1>
+            <h1 className="text-2xl font-bold mb-1">Students</h1>
             <p className="text-sm text-muted-foreground">
-              Manage and view all academy programs
+              View and manage all enrolled students
             </p>
           </div>
 
-          {/* Search and Create */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="relative flex-1 max-w-md">
+          {/* Search */}
+          <div className="mb-6">
+            <div className="relative max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Search academies..."
+                placeholder="Search students..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
-            <Link href="/academies/new">
-              <Button className="gap-2">
-                + Create New Academy
-              </Button>
-            </Link>
           </div>
 
-          {/* Academy Grid */}
+          {/* Students Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredAcademies.map((academy) => (
+            {filteredStudents.map((student, index) => (
               <Link
-                key={academy.id}
-                href={`/academies/${academy.id}`}
+                key={student.id}
+                href={`/students/${student.id}`}
                 className="block bg-card border border-border rounded-lg p-4 hover:shadow-md hover:-translate-y-0.5 transition-all"
               >
-                <div className="flex items-start justify-between mb-3">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-base shrink-0 avatar-gradient-${(index % 6) + 1}`}>
+                    {student.name.split(' ').map(n => n[0]).join('')}
+                  </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-base mb-1 truncate">
-                      {academy.name}
+                      {student.name}
                     </h3>
                     <p className="text-xs text-muted-foreground">
-                      {academy.startDate} - {academy.endDate}
+                      📍 {student.location}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <div className="text-xs text-muted-foreground">
-                      📍 {academy.location}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      👤 {academy.studentCount} students
-                    </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground">Attendance</span>
+                    <span className="font-medium">{student.attendance}</span>
                   </div>
-                  <div
-                    className={`px-2.5 py-1 rounded-md border text-[9px] font-bold uppercase tracking-wide ${
-                      statusConfig[academy.status]
-                    }`}
-                  >
-                    {academy.status}
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground">Status</span>
+                    <span
+                      className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                        performanceConfig[student.performance as keyof typeof performanceConfig].color
+                      }`}
+                    >
+                      {performanceConfig[student.performance as keyof typeof performanceConfig].label}
+                    </span>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
 
-          {filteredAcademies.length === 0 && (
+          {filteredStudents.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground text-sm">
-                No academies found matching your search.
+                No students found matching your search.
               </p>
             </div>
           )}

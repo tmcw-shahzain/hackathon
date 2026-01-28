@@ -146,15 +146,15 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-3">
               {selectedLocation && (
-                <div className="flex items-center gap-2 rounded-lg border border-border/40 bg-muted/30 px-3 py-1.5">
-                  <span className="text-sm font-medium text-foreground/90">
+                <div className="flex items-center gap-2 rounded-lg badge-location px-3 py-1.5">
+                  <span className="text-sm font-medium">
                     {selectedLocation}
                   </span>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => setSelectedLocation("")}
-                    className="h-6 px-2 text-xs text-muted-foreground hover:text-foreground"
+                    className="h-6 px-2 text-xs text-white/80 hover:text-white hover:bg-white/10"
                   >
                     Change
                   </Button>
@@ -221,7 +221,7 @@ export default function Dashboard() {
                 <div className="bg-card border border-border rounded-lg overflow-hidden">
                   <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
                     <h2 className="text-base font-bold">Today&apos;s Sessions</h2>
-                    <Link href="/timetable" className="text-xs font-medium text-blue-600 hover:opacity-80">
+                    <Link href="/timetable" className="text-xs font-medium text-primary hover:opacity-80">
                       View Timetable →
                     </Link>
                   </div>
@@ -245,7 +245,11 @@ export default function Dashboard() {
                             </div>
                           </div>
                           <div className="text-right shrink-0">
-                            <div className="inline-block px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[9px] font-semibold uppercase tracking-wide mb-1">
+                            <div className={`inline-block px-2 py-0.5 rounded-md text-[9px] font-semibold uppercase tracking-wide mb-1 ${
+                              index === 0
+                                ? 'bg-primary/15 border border-primary text-primary'
+                                : 'bg-muted-foreground/10 border border-muted-foreground text-muted-foreground'
+                            }`}>
                               {index === 0 ? 'In Progress' : 'Upcoming'}
                             </div>
                             <div className="text-[10px] text-muted-foreground font-medium">8/8 present</div>
@@ -260,7 +264,7 @@ export default function Dashboard() {
                 <div className="bg-card border border-border rounded-lg overflow-hidden">
                   <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
                     <h2 className="text-base font-bold">Past Sessions</h2>
-                    <Link href="/timetable?past=1" className="text-xs font-medium text-blue-600 hover:opacity-80">
+                    <Link href="/timetable?past=1" className="text-xs font-medium text-primary hover:opacity-80">
                       View All →
                     </Link>
                   </div>
@@ -285,7 +289,7 @@ export default function Dashboard() {
                 <div className="bg-card border border-border rounded-lg overflow-hidden">
                   <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
                     <h2 className="text-base font-bold">Today&apos;s Absences</h2>
-                    <a href="#" className="text-xs font-medium text-blue-600 hover:opacity-80">
+                    <a href="#" className="text-xs font-medium text-primary hover:opacity-80">
                       Manage →
                     </a>
                   </div>
@@ -308,10 +312,10 @@ export default function Dashboard() {
                     <h2 className="text-base font-bold">Quick Actions</h2>
                   </div>
                   <div className="p-3 flex gap-2">
-                    <button className="flex-1 bg-foreground text-background px-3 py-2.5 rounded-lg font-semibold text-xs hover:opacity-90 transition-all hover:-translate-y-0.5">
+                    <button className="flex-1 btn-primary-gold px-3 py-2.5 rounded-lg font-semibold text-xs hover:opacity-90 transition-all hover:-translate-y-0.5">
                       + New Session
                     </button>
-                    <button className="flex-1 bg-muted text-foreground px-3 py-2.5 rounded-lg font-semibold text-xs hover:bg-muted/80 transition-colors">
+                    <button className="flex-1 bg-card border border-primary text-primary px-3 py-2.5 rounded-lg font-semibold text-xs hover:bg-primary/5 transition-colors">
                       📧 Message
                     </button>
                   </div>
@@ -333,13 +337,13 @@ export default function Dashboard() {
                 </div>
               </div>
               <div className="flex-1 overflow-y-auto p-3">
-                {students.map((student) => (
+                {students.map((student, index) => (
                   <Link
                     key={student.id}
                     href={`/students/${student.id}`}
                     className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted transition-colors mb-1.5 group"
                   >
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-bold text-xs shrink-0 relative">
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0 relative avatar-gradient-${(index % 6) + 1}`}>
                       {student.name.split(' ').map(n => n[0]).join('')}
                       <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-card rounded-full"></div>
                     </div>
