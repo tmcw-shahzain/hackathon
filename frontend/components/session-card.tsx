@@ -19,27 +19,25 @@ export function SessionCard({
   return (
     <div
       className={cn(
-        "flex min-h-0 flex-col rounded-md border border-border bg-background p-2.5 transition-colors hover:bg-muted/40",
+        "flex flex-col rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm px-3 py-2 transition-all hover:bg-muted/30 hover:border-border hover:shadow-sm",
         className
       )}
     >
-      <div className="space-y-1">
-        {date && (
-          <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-            {date}
-          </span>
-        )}
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-semibold tabular-nums text-foreground">
-            {time}
-          </span>
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <Clock className="size-3" />
-            <span className="text-[11px] font-medium tabular-nums">{duration}</span>
-          </div>
+      {date && (
+        <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground/70 mb-0.5">
+          {date}
+        </span>
+      )}
+      <div className="flex items-baseline justify-between mb-0.5">
+        <span className="text-base font-semibold tabular-nums text-foreground">
+          {time}
+        </span>
+        <div className="flex items-center gap-1 text-muted-foreground">
+          <Clock className="size-3" />
+          <span className="text-[11px] font-medium tabular-nums">{duration}</span>
         </div>
-        <p className="text-xs font-medium text-foreground leading-tight">{moduleName}</p>
       </div>
+      <p className="text-sm font-medium text-foreground/90 leading-tight">{moduleName}</p>
     </div>
   )
 }

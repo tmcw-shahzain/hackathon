@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx shadcn@latest add chart:*)",
+      "Bash(npm install:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)"
+    ]
+  }
+}

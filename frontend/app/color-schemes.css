@@ -1,0 +1,121 @@
+/*
+  Street League Color Scheme Variations
+  Uncomment the theme you want to use by removing the .theme-X class wrapper
+  Then add that class to the <body> tag in your layout
+*/
+
+/* ============================================
+   OPTION 1: Deep Black with Gold Accents
+   Dark, professional, gold pops beautifully
+   ============================================ */
+.theme-1 {
+  --background: oklch(0.12 0 0);
+  --foreground: oklch(0.93 0 0);
+  --card: oklch(0.15 0 0);
+  --card-foreground: oklch(0.93 0 0);
+  --popover: oklch(0.15 0 0);
+  --popover-foreground: oklch(0.93 0 0);
+  --primary: oklch(0.68 0.08 85);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.20 0 0);
+  --secondary-foreground: oklch(0.93 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.60 0 0);
+  --accent: oklch(0.68 0.08 85);
+  --accent-foreground: oklch(0.12 0 0);
+  --destructive: oklch(0.60 0.22 25);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.18 0 0);
+  --ring: oklch(0.68 0.08 85);
+  --sidebar: oklch(0.08 0 0);
+  --sidebar-foreground: oklch(0.93 0 0);
+  --sidebar-primary: oklch(0.68 0.08 85);
+  --sidebar-border: oklch(0.15 0 0);
+}
+
+/* ============================================
+   OPTION 2: Charcoal & Gold (Sophisticated)
+   Softer dark with warm gold highlights
+   ============================================ */
+.theme-2 {
+  --background: oklch(0.18 0.01 250);
+  --foreground: oklch(0.93 0 0);
+  --card: oklch(0.22 0.01 250);
+  --card-foreground: oklch(0.93 0 0);
+  --popover: oklch(0.22 0.01 250);
+  --popover-foreground: oklch(0.93 0 0);
+  --primary: oklch(0.68 0.08 85);
+  --primary-foreground: oklch(0.18 0.01 250);
+  --secondary: oklch(0.28 0.01 250);
+  --secondary-foreground: oklch(0.93 0 0);
+  --muted: oklch(0.25 0.01 250);
+  --muted-foreground: oklch(0.60 0 0);
+  --accent: oklch(0.68 0.08 85);
+  --accent-foreground: oklch(0.18 0.01 250);
+  --destructive: oklch(0.60 0.22 25);
+  --border: oklch(0.32 0.01 250);
+  --input: oklch(0.25 0.01 250);
+  --ring: oklch(0.68 0.08 85);
+  --sidebar: oklch(0.15 0.01 250);
+  --sidebar-foreground: oklch(0.93 0 0);
+  --sidebar-primary: oklch(0.68 0.08 85);
+  --sidebar-border: oklch(0.22 0.01 250);
+}
+
+/* ============================================
+   OPTION 3: Navy Black with Bright Gold
+   Very dark navy, gold stands out strongly
+   ============================================ */
+.theme-3 {
+  --background: oklch(0.10 0.01 250);
+  --foreground: oklch(0.93 0 0);
+  --card: oklch(0.13 0.01 250);
+  --card-foreground: oklch(0.93 0 0);
+  --popover: oklch(0.13 0.01 250);
+  --popover-foreground: oklch(0.93 0 0);
+  --primary: oklch(0.70 0.10 85);
+  --primary-foreground: oklch(0.10 0.01 250);
+  --secondary: oklch(0.18 0.01 250);
+  --secondary-foreground: oklch(0.93 0 0);
+  --muted: oklch(0.15 0.01 250);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.70 0.10 85);
+  --accent-foreground: oklch(0.10 0.01 250);
+  --destructive: oklch(0.60 0.22 25);
+  --border: oklch(0.22 0.01 250);
+  --input: oklch(0.15 0.01 250);
+  --ring: oklch(0.70 0.10 85);
+  --sidebar: oklch(0.08 0.01 250);
+  --sidebar-foreground: oklch(0.93 0 0);
+  --sidebar-primary: oklch(0.70 0.10 85);
+  --sidebar-border: oklch(0.15 0.01 250);
+}
+
+/* ============================================
+   OPTION 4: Balanced Dark (Charcoal Focus)
+   Medium dark with subtle gold touches
+   ============================================ */
+.theme-4 {
+  --background: oklch(0.15 0 0);
+  --foreground: oklch(0.90 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.90 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.90 0 0);
+  --primary: oklch(0.68 0.08 85);
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.90 0 0);
+  --muted: oklch(0.20 0 0);
+  --muted-foreground: oklch(0.58 0 0);
+  --accent: oklch(0.68 0.08 85);
+  --accent-foreground: oklch(0.15 0 0);
+  --destructive: oklch(0.60 0.22 25);
+  --border: oklch(0.28 0 0);
+  --input: oklch(0.20 0 0);
+  --ring: oklch(0.68 0.08 85);
+  --sidebar: oklch(0.12 0 0);
+  --sidebar-foreground: oklch(0.90 0 0);
+  --sidebar-primary: oklch(0.68 0.08 85);
+  --sidebar-border: oklch(0.18 0 0);
+}
