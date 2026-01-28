@@ -33,7 +33,7 @@ const students = [
 
 const performanceConfig = {
   excellent: { label: "On track", color: "bg-emerald-500/12 text-emerald-700" },
-  good: { label: "Good", color: "bg-blue-500/12 text-blue-700" },
+  good: { label: "Good", color: "bg-primary/15 text-primary" },
   "needs-improvement": { label: "Needs support", color: "bg-amber-500/12 text-amber-700" },
   poor: { label: "At risk", color: "bg-red-500/12 text-red-600" },
 }

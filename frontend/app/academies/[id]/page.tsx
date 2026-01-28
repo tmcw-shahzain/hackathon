@@ -58,7 +58,7 @@ const academyData = {
 }
 
 const statusConfig = {
-  "IN PROGRESS": "bg-blue-100 text-blue-700 border-blue-200",
+  "IN PROGRESS": "bg-primary/15 text-primary border-primary",
   "READY": "bg-green-100 text-green-700 border-green-200",
   "WAITING ILP": "bg-amber-100 text-amber-700 border-amber-200",
 }

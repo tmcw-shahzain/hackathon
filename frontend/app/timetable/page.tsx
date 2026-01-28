@@ -288,12 +288,12 @@ export default function TimetablePage() {
                                   <Link
                                     key={session.id}
                                     href={`/session/${session.id}`}
-                                    className="block bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-2.5 hover:shadow-md hover:-translate-y-0.5 transition-all"
+                                    className="block bg-primary/10 border border-primary/30 rounded-lg p-2.5 hover:shadow-md hover:-translate-y-0.5 transition-all hover:bg-primary/15"
                                   >
-                                    <div className="font-semibold text-xs mb-1 text-blue-900 dark:text-blue-100">
+                                    <div className="font-semibold text-xs mb-1 text-foreground">
                                       {session.moduleName}
                                     </div>
-                                    <div className="text-[10px] text-blue-700 dark:text-blue-300 space-y-0.5">
+                                    <div className="text-[10px] text-muted-foreground space-y-0.5">
                                       <div>⏱️ {session.duration}</div>
                                       <div>📍 {session.location}</div>
                                       <div>👤 {session.students} students</div>
