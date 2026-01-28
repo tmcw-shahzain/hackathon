@@ -26,7 +26,7 @@ app.add_middleware(
 # Startup and shutdown events for MongoDB
 @app.on_event("startup")
 async def startup_db_client():
-    db_module.mongodb_client = db_module.AsyncIOMotorClient(db_module.config.MONGODB_URL)
+    db_module.mongodb_client = db_module.AsyncIOMotorClient(db_module.MONGODB_URL)
     db_module.mongodb_db = db_module.mongodb_client["main"]
 
 @app.on_event("shutdown")
