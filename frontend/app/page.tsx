@@ -16,18 +16,14 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar"
 import { LocationSelector } from "@/components/location-selector"
-import { SessionCard } from "@/components/session-card"
-import { StudentCard } from "@/components/student-card"
-import { AbsenceCard } from "@/components/absence-card"
 import {
   AbsenceDetailModal,
   type AbsenceDetail,
 } from "@/components/absence-detail-modal"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { Search, ArrowRight, Users, Calendar, Building2, BarChart3 } from "lucide-react"
+import { Users, Calendar, Building2, BarChart3 } from "lucide-react"
 
 // Mock data
 const todaysSessions = [
@@ -82,13 +78,8 @@ const absencesWithDetail: AbsenceDetail[] = [
 
 export default function Dashboard() {
   const [selectedLocation, setSelectedLocation] = useState<string>("")
-  const [studentSearch, setStudentSearch] = useState("")
   const [absenceModalOpen, setAbsenceModalOpen] = useState(false)
   const [selectedAbsence, setSelectedAbsence] = useState<AbsenceDetail | null>(null)
-
-  const filteredStudents = students.filter((student) =>
-    student.name.toLowerCase().includes(studentSearch.toLowerCase())
-  )
 
   const openAbsenceModal = (absence: AbsenceDetail) => {
     setSelectedAbsence(absence)
@@ -140,36 +131,36 @@ export default function Dashboard() {
         </SidebarContent>
       </Sidebar>
       <SidebarInset>
-        <header className="flex h-14 shrink-0 items-center gap-3 border-b border-border px-4 md:px-6">
-          <SidebarTrigger className="-ml-1 size-8" />
-          <div className="flex flex-1 items-center justify-between gap-2">
+        <header className="flex h-14 shrink-0 items-center gap-4 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
+          <SidebarTrigger className="-ml-2 size-8" />
+          <div className="flex flex-1 items-center justify-between gap-4">
             <div>
-              <h1 className="text-base font-semibold tracking-tight text-foreground md:text-lg">
+              <h1 className="text-lg font-semibold tracking-tight text-foreground">
                 Hello, Shahzain
               </h1>
-              <p className="text-xs text-muted-foreground md:text-sm">
+              <p className="text-xs text-muted-foreground/70">
                 {selectedLocation
-                  ? `You have ${todaysSessions.length} workshops today`
+                  ? `${todaysSessions.length} workshops today`
                   : "Select a location to view your dashboard"}
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               {selectedLocation && (
-                <div className="flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2.5 py-1">
-                  <span className="text-sm font-medium text-foreground">
+                <div className="flex items-center gap-2 rounded-lg border border-border/40 bg-muted/30 px-3 py-1.5">
+                  <span className="text-sm font-medium text-foreground/90">
                     {selectedLocation}
                   </span>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => setSelectedLocation("")}
-                    className="h-8 px-2.5 text-sm"
+                    className="h-6 px-2 text-xs text-muted-foreground hover:text-foreground"
                   >
                     Change
                   </Button>
                 </div>
               )}
-              <Avatar size="lg" className="size-9">
+              <Avatar size="lg" className="size-9 ring-2 ring-border/20">
                 <AvatarImage src="/avatar.webp" alt="Shahzain" />
                 <AvatarFallback>SA</AvatarFallback>
               </Avatar>
@@ -197,118 +188,169 @@ export default function Dashboard() {
             </div>
           </div>
         ) : (
-          <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-3 animate-fade-in">
-            <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
-              <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-                <div className="flex shrink-0 items-center justify-between border-b border-border bg-muted/30 px-4 py-3">
-                  <Link href="/timetable" className="rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1">
-                    <h2 className="text-base font-semibold tracking-tight text-foreground">
-                      Today&apos;s Sessions
-                    </h2>
-                  </Link>
-                  <Button variant="outline" size="sm" className="h-8 gap-1.5 text-sm" asChild>
-                    <Link href="/timetable">
-                      View all
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </Button>
+          <div className="flex min-h-0 flex-1">
+            {/* Main Dashboard Area */}
+            <div className="flex-1 overflow-hidden p-4">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-4 gap-3 mb-4">
+                <div className="bg-card border border-border rounded-lg p-3">
+                  <div className="text-[10px] font-medium text-muted-foreground mb-1">Today's Sessions</div>
+                  <div className="text-2xl font-bold mb-0.5">{todaysSessions.length}</div>
+                  <div className="text-[10px] font-semibold text-green-600">Same as usual</div>
                 </div>
-                <div className="flex min-h-0 flex-1 flex-col gap-2 p-2">
-                  {todaysSessions.map((session) => (
-                    <Link
-                      key={session.id}
-                      href={`/timetable?session=${session.id}`}
-                      className="flex flex-1 min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
-                    >
-                      <SessionCard
-                        time={session.time}
-                        moduleName={session.moduleName}
-                        duration={session.duration}
-                        className="flex-1"
-                      />
-                    </Link>
-                  ))}
+                <div className="bg-card border border-border rounded-lg p-3">
+                  <div className="text-[10px] font-medium text-muted-foreground mb-1">Total Students</div>
+                  <div className="text-2xl font-bold mb-0.5">{students.length}</div>
+                  <div className="text-[10px] font-semibold text-green-600">+3 this week</div>
+                </div>
+                <div className="bg-card border border-border rounded-lg p-3">
+                  <div className="text-[10px] font-medium text-muted-foreground mb-1">Attendance Rate</div>
+                  <div className="text-2xl font-bold mb-0.5">94%</div>
+                  <div className="text-[10px] font-semibold text-green-600">+2.3%</div>
+                </div>
+                <div className="bg-card border border-border rounded-lg p-3">
+                  <div className="text-[10px] font-medium text-muted-foreground mb-1">Absences Today</div>
+                  <div className="text-2xl font-bold mb-0.5">{absencesWithDetail.length}</div>
+                  <div className="text-[10px] font-semibold text-red-600">+1 from avg</div>
                 </div>
               </div>
 
-              <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-                <div className="shrink-0 border-b border-border bg-muted/30 px-4 py-3">
-                  <Link href="/students" className="rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1">
-                    <h2 className="mb-2 text-base font-semibold tracking-tight text-foreground">
-                      Students
-                    </h2>
-                  </Link>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      placeholder="Search by name..."
-                      value={studentSearch}
-                      onChange={(e) => setStudentSearch(e.target.value)}
-                      className="h-9 bg-background pl-10 text-sm"
-                    />
+              {/* Main Grid */}
+              <div className="grid grid-cols-[1fr_300px] gap-4 mb-4">
+                {/* Today's Sessions */}
+                <div className="bg-card border border-border rounded-lg overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+                    <h2 className="text-base font-bold">Today&apos;s Sessions</h2>
+                    <Link href="/timetable" className="text-xs font-medium text-blue-600 hover:opacity-80">
+                      View Timetable →
+                    </Link>
+                  </div>
+                  <div className="p-3 space-y-2">
+                    {todaysSessions.map((session, index) => (
+                      <Link
+                        key={session.id}
+                        href={`/timetable?session=${session.id}`}
+                        className="block bg-muted/50 rounded-lg p-2.5 hover:shadow-md hover:-translate-y-0.5 transition-all"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="text-center w-16 shrink-0">
+                            <div className="text-lg font-bold leading-none mb-0.5">{session.time}</div>
+                            <div className="text-[10px] text-muted-foreground font-medium">{session.duration}</div>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-semibold text-sm mb-1">{session.moduleName}</h3>
+                            <div className="flex gap-2 text-[10px] text-muted-foreground">
+                              <span>👤 8 students</span>
+                              <span>📍 Field A</span>
+                            </div>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <div className="inline-block px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[9px] font-semibold uppercase tracking-wide mb-1">
+                              {index === 0 ? 'In Progress' : 'Upcoming'}
+                            </div>
+                            <div className="text-[10px] text-muted-foreground font-medium">8/8 present</div>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </div>
-                <div className="flex min-h-0 flex-1 flex-col gap-2 p-2">
-                  {filteredStudents.slice(0, 4).map((student) => (
-                    <Link
-                      key={student.id}
-                      href={`/students/${student.id}`}
-                      className="flex flex-1 min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
-                    >
-                      <StudentCard
-                        name={student.name}
-                        performance={student.performance}
-                        className="flex-1"
-                      />
+
+                {/* Recent Activity */}
+                <div className="bg-card border border-border rounded-lg overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+                    <h2 className="text-base font-bold">Recent Activity</h2>
+                    <Link href="/timetable?past=1" className="text-xs font-medium text-blue-600 hover:opacity-80">
+                      View All →
                     </Link>
-                  ))}
+                  </div>
+                  <div className="p-3">
+                    {pastSessions.slice(0, 2).map((session) => (
+                      <div key={session.id} className="py-2.5 border-b border-border last:border-0">
+                        <div className="font-semibold text-xs mb-0.5">{session.moduleName}</div>
+                        <div className="text-[10px] text-muted-foreground">{session.date} • {session.duration} • 8 students</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-                <div className="shrink-0 border-b border-border bg-muted/30 px-4 py-3">
-                  <Link href="/timetable?past=1" className="rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1">
-                    <h2 className="text-base font-semibold tracking-tight text-foreground">
-                      Past Sessions
-                    </h2>
+              {/* Bottom Grid */}
+              <div className="grid grid-cols-[2fr_1fr] gap-4">
+                {/* Absences */}
+                <div className="bg-card border border-border rounded-lg overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+                    <h2 className="text-base font-bold">Today&apos;s Absences</h2>
+                    <a href="#" className="text-xs font-medium text-blue-600 hover:opacity-80">
+                      Manage →
+                    </a>
+                  </div>
+                  <div className="p-3">
+                    {absencesWithDetail.map((absence, index) => (
+                      <div key={index} className="py-2 border-b border-border last:border-0 cursor-pointer" onClick={() => openAbsenceModal(absence)}>
+                        <div className="flex items-center justify-between mb-0.5">
+                          <span className="font-semibold text-xs">{absence.studentName}</span>
+                          <span className="text-[10px] text-muted-foreground">Notified</span>
+                        </div>
+                        <div className="text-[10px] text-muted-foreground">Missed: {absence.sessionName}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="bg-card border border-border rounded-lg overflow-hidden">
+                  <div className="border-b border-border px-4 py-2.5">
+                    <h2 className="text-base font-bold">Quick Actions</h2>
+                  </div>
+                  <div className="p-3 flex gap-2">
+                    <button className="flex-1 bg-foreground text-background px-3 py-2.5 rounded-lg font-semibold text-xs hover:opacity-90 transition-all hover:-translate-y-0.5">
+                      + New Session
+                    </button>
+                    <button className="flex-1 bg-muted text-foreground px-3 py-2.5 rounded-lg font-semibold text-xs hover:bg-muted/80 transition-colors">
+                      📧 Message
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Students Sidebar */}
+            <div className="w-72 bg-card border-l border-border flex flex-col overflow-hidden">
+              <div className="p-4 pb-3 border-b border-border">
+                <h2 className="text-base font-bold mb-3">Active Students</h2>
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search students..."
+                    className="w-full pl-8 pr-2 py-2 bg-muted border border-border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">🔍</span>
+                </div>
+              </div>
+              <div className="flex-1 overflow-y-auto p-3">
+                {students.map((student) => (
+                  <Link
+                    key={student.id}
+                    href={`/students/${student.id}`}
+                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-muted transition-colors mb-1.5 group"
+                  >
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-bold text-xs shrink-0 relative">
+                      {student.name.split(' ').map(n => n[0]).join('')}
+                      <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-card rounded-full"></div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-xs mb-0.5">{student.name}</div>
+                      <div className="text-[10px] text-muted-foreground">
+                        {student.performance === 'excellent' && 'On track • 90% attendance'}
+                        {student.performance === 'good' && 'Good • 85% attendance'}
+                        {student.performance === 'needs-improvement' && 'Needs attention • 75%'}
+                        {student.performance === 'poor' && 'At risk • 65% attendance'}
+                      </div>
+                    </div>
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground text-sm">→</div>
                   </Link>
-                </div>
-                <div className="flex min-h-0 flex-1 flex-col gap-2 p-2">
-                  {pastSessions.slice(0, 4).map((session) => (
-                    <Link
-                      key={session.id}
-                      href={`/timetable?session=${session.id}`}
-                      className="flex flex-1 min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
-                    >
-                      <SessionCard
-                        date={session.date}
-                        time={session.time}
-                        moduleName={session.moduleName}
-                        duration={session.duration}
-                        className="flex-1"
-                      />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-                <div className="shrink-0 border-b border-border bg-muted/30 px-4 py-3">
-                  <h2 className="text-base font-semibold tracking-tight text-foreground">
-                    Absences
-                  </h2>
-                </div>
-                <div className="flex min-h-0 flex-1 flex-col gap-2 p-2">
-                  {absencesWithDetail.map((absence, index) => (
-                    <AbsenceCard
-                      key={index}
-                      studentName={absence.studentName}
-                      sessionName={absence.sessionName}
-                      onClick={() => openAbsenceModal(absence)}
-                      className="flex-1"
-                    />
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
           </div>

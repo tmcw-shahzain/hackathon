@@ -43,29 +43,25 @@ export function StudentCard({
   return (
     <div
       className={cn(
-        "flex min-h-0 flex-col justify-center gap-3 rounded-md border border-border bg-background p-4 transition-colors hover:bg-muted/40",
+        "flex items-center gap-2 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm px-2.5 py-2 transition-all hover:bg-muted/30 hover:border-border hover:shadow-sm",
         className
       )}
     >
-      <div className="flex items-center gap-3">
-        <Avatar size="sm" className="size-12 shrink-0">
-          <AvatarImage src={avatarUrl || "/avatar.webp"} alt={name} />
-          <AvatarFallback className="text-sm font-medium">
-            {name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")
-              .toUpperCase()}
-          </AvatarFallback>
-        </Avatar>
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-base font-semibold text-foreground">{name}</p>
-        </div>
-      </div>
-      <div className="flex items-center justify-start">
+      <Avatar size="sm" className="size-8 shrink-0">
+        <AvatarImage src={avatarUrl || "/avatar.webp"} alt={name} />
+        <AvatarFallback className="text-[10px] font-medium">
+          {name
+            .split(" ")
+            .map((n) => n[0])
+            .join("")
+            .toUpperCase()}
+        </AvatarFallback>
+      </Avatar>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-xs font-semibold text-foreground mb-0.5">{name}</p>
         <span
           className={cn(
-            "rounded-full px-3 py-1.5 text-sm font-medium leading-none",
+            "inline-block rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none",
             config.className
           )}
         >
