@@ -43,14 +43,14 @@ export function StudentCard({
   return (
     <div
       className={cn(
-        "flex min-h-0 flex-col rounded-md border border-border bg-background p-2.5 transition-colors hover:bg-muted/40",
+        "flex min-h-0 flex-col justify-center gap-3 rounded-md border border-border bg-background p-4 transition-colors hover:bg-muted/40",
         className
       )}
     >
-      <div className="flex items-center gap-2">
-        <Avatar size="sm" className="size-9 shrink-0">
+      <div className="flex items-center gap-3">
+        <Avatar size="sm" className="size-12 shrink-0">
           <AvatarImage src={avatarUrl || "/avatar.webp"} alt={name} />
-          <AvatarFallback className="text-[11px] font-medium">
+          <AvatarFallback className="text-sm font-medium">
             {name
               .split(" ")
               .map((n) => n[0])
@@ -59,13 +59,13 @@ export function StudentCard({
           </AvatarFallback>
         </Avatar>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-xs font-semibold text-foreground">{name}</p>
+          <p className="truncate text-base font-semibold text-foreground">{name}</p>
         </div>
       </div>
-      <div className="mt-1 flex items-center justify-start">
+      <div className="flex items-center justify-start">
         <span
           className={cn(
-            "rounded-full px-1.5 py-0.5 text-[10px] font-medium",
+            "rounded-full px-3 py-1.5 text-sm font-medium leading-none",
             config.className
           )}
         >

@@ -18,13 +18,13 @@ export function AbsenceCard({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex min-h-0 w-full flex-col rounded-md border border-destructive/25 bg-destructive/5 p-2.5 text-left transition-colors hover:bg-destructive/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset",
+        "flex min-h-0 w-full flex-col justify-center rounded-md border border-destructive/25 bg-destructive/5 p-4 text-left transition-colors hover:bg-destructive/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset",
         className
       )}
     >
-      <div>
-        <p className="text-xs font-semibold text-foreground">{studentName}</p>
-        <p className="mt-0.5 text-[11px] text-muted-foreground">
+      <div className="space-y-2">
+        <p className="text-base font-semibold text-foreground">{studentName}</p>
+        <p className="text-sm text-muted-foreground">
           Missed: {sessionName}
         </p>
       </div>

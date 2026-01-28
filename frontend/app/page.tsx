@@ -142,9 +142,9 @@ export default function Dashboard() {
       <SidebarInset>
         <header className="flex h-14 shrink-0 items-center gap-3 border-b border-border px-4 md:px-6">
           <SidebarTrigger className="-ml-1 size-8" />
-          <div className="flex flex-1 items-center justify-between gap-3">
+          <div className="flex flex-1 items-center justify-between gap-2">
             <div>
-              <h1 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
+              <h1 className="text-base font-semibold tracking-tight text-foreground md:text-lg">
                 Hello, Shahzain
               </h1>
               <p className="text-xs text-muted-foreground md:text-sm">
@@ -153,9 +153,9 @@ export default function Dashboard() {
                   : "Select a location to view your dashboard"}
               </p>
             </div>
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               {selectedLocation && (
-                <div className="flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-3 py-1.5">
+                <div className="flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2.5 py-1">
                   <span className="text-sm font-medium text-foreground">
                     {selectedLocation}
                   </span>
@@ -163,7 +163,7 @@ export default function Dashboard() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setSelectedLocation("")}
-                    className="h-7 px-2 text-xs"
+                    className="h-8 px-2.5 text-sm"
                   >
                     Change
                   </Button>
@@ -197,121 +197,117 @@ export default function Dashboard() {
             </div>
           </div>
         ) : (
-          <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-3 md:p-4 animate-fade-in">
-            <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:grid-rows-3 md:gap-3 md:auto-rows-fr">
-              <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm md:row-span-3">
-                <div className="flex shrink-0 items-center justify-between border-b border-border bg-muted/30 px-3 py-2">
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-3 animate-fade-in">
+            <div className="grid min-h-0 flex-1 grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2">
+              <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+                <div className="flex shrink-0 items-center justify-between border-b border-border bg-muted/30 px-4 py-3">
                   <Link href="/timetable" className="rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1">
-                    <h2 className="text-sm font-semibold tracking-tight text-foreground">
+                    <h2 className="text-base font-semibold tracking-tight text-foreground">
                       Today&apos;s Sessions
                     </h2>
                   </Link>
-                  <Button variant="outline" size="sm" className="h-7 gap-1 text-xs" asChild>
+                  <Button variant="outline" size="sm" className="h-8 gap-1.5 text-sm" asChild>
                     <Link href="/timetable">
-                      View timetable
-                      <ArrowRight className="size-3" />
+                      View all
+                      <ArrowRight className="size-4" />
                     </Link>
                   </Button>
                 </div>
-                <div className="flex min-h-0 flex-1 overflow-auto px-3 py-3">
-                  <div className="grid h-full min-h-0 grid-cols-1 gap-2.5 sm:grid-cols-2 sm:grid-rows-2">
-                    {todaysSessions.map((session) => (
-                      <Link
-                        key={session.id}
-                        href={`/timetable?session=${session.id}`}
-                        className="block min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
-                      >
-                        <SessionCard
-                          time={session.time}
-                          moduleName={session.moduleName}
-                          duration={session.duration}
-                        />
-                      </Link>
-                    ))}
-                  </div>
+                <div className="flex min-h-0 flex-1 flex-col gap-2 p-2">
+                  {todaysSessions.map((session) => (
+                    <Link
+                      key={session.id}
+                      href={`/timetable?session=${session.id}`}
+                      className="flex flex-1 min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+                    >
+                      <SessionCard
+                        time={session.time}
+                        moduleName={session.moduleName}
+                        duration={session.duration}
+                        className="flex-1"
+                      />
+                    </Link>
+                  ))}
                 </div>
               </div>
 
               <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-                <div className="shrink-0 border-b border-border bg-muted/30 px-3 py-2">
+                <div className="shrink-0 border-b border-border bg-muted/30 px-4 py-3">
                   <Link href="/students" className="rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1">
-                    <h2 className="mb-1.5 text-sm font-semibold tracking-tight text-foreground">
+                    <h2 className="mb-2 text-base font-semibold tracking-tight text-foreground">
                       Students
                     </h2>
                   </Link>
                   <div className="relative">
-                    <Search className="absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+                    <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
                       placeholder="Search by name..."
                       value={studentSearch}
                       onChange={(e) => setStudentSearch(e.target.value)}
-                      className="h-8 bg-background pl-8 text-xs"
+                      className="h-9 bg-background pl-10 text-sm"
                     />
                   </div>
                 </div>
-                <div className="flex min-h-0 flex-1 overflow-auto px-3 py-2.5">
-                  <div className="grid h-full min-h-0 grid-cols-1 gap-2.5 sm:grid-cols-2 sm:grid-rows-3">
-                    {filteredStudents.map((student) => (
-                      <Link
-                        key={student.id}
-                        href={`/students/${student.id}`}
-                        className="block min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
-                      >
-                        <StudentCard
-                          name={student.name}
-                          performance={student.performance}
-                        />
-                      </Link>
-                    ))}
-                  </div>
+                <div className="flex min-h-0 flex-1 flex-col gap-2 p-2">
+                  {filteredStudents.slice(0, 4).map((student) => (
+                    <Link
+                      key={student.id}
+                      href={`/students/${student.id}`}
+                      className="flex flex-1 min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+                    >
+                      <StudentCard
+                        name={student.name}
+                        performance={student.performance}
+                        className="flex-1"
+                      />
+                    </Link>
+                  ))}
                 </div>
               </div>
 
               <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-                <div className="shrink-0 border-b border-border bg-muted/30 px-3 py-2">
+                <div className="shrink-0 border-b border-border bg-muted/30 px-4 py-3">
                   <Link href="/timetable?past=1" className="rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1">
-                    <h2 className="text-sm font-semibold tracking-tight text-foreground">
+                    <h2 className="text-base font-semibold tracking-tight text-foreground">
                       Past Sessions
                     </h2>
                   </Link>
                 </div>
-                <div className="flex min-h-0 flex-1 overflow-auto px-3 py-2.5">
-                  <div className="grid h-full min-h-0 grid-cols-1 gap-2.5 sm:grid-cols-2 sm:grid-rows-2">
-                    {pastSessions.slice(0, 4).map((session) => (
-                      <Link
-                        key={session.id}
-                        href={`/timetable?session=${session.id}`}
-                        className="block min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
-                      >
-                        <SessionCard
-                          date={session.date}
-                          time={session.time}
-                          moduleName={session.moduleName}
-                          duration={session.duration}
-                        />
-                      </Link>
-                    ))}
-                  </div>
+                <div className="flex min-h-0 flex-1 flex-col gap-2 p-2">
+                  {pastSessions.slice(0, 4).map((session) => (
+                    <Link
+                      key={session.id}
+                      href={`/timetable?session=${session.id}`}
+                      className="flex flex-1 min-h-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+                    >
+                      <SessionCard
+                        date={session.date}
+                        time={session.time}
+                        moduleName={session.moduleName}
+                        duration={session.duration}
+                        className="flex-1"
+                      />
+                    </Link>
+                  ))}
                 </div>
               </div>
 
               <div className="flex min-h-0 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-                <div className="shrink-0 border-b border-border bg-muted/30 px-3 py-2">
-                  <h2 className="text-sm font-semibold tracking-tight text-foreground">
+                <div className="shrink-0 border-b border-border bg-muted/30 px-4 py-3">
+                  <h2 className="text-base font-semibold tracking-tight text-foreground">
                     Absences
                   </h2>
                 </div>
-                <div className="flex min-h-0 flex-1 overflow-auto px-3 py-2.5">
-                  <div className="grid h-full min-h-0 grid-cols-1 gap-2.5 sm:grid-rows-3">
-                    {absencesWithDetail.map((absence, index) => (
-                      <AbsenceCard
-                        key={index}
-                        studentName={absence.studentName}
-                        sessionName={absence.sessionName}
-                        onClick={() => openAbsenceModal(absence)}
-                      />
-                    ))}
-                  </div>
+                <div className="flex min-h-0 flex-1 flex-col gap-2 p-2">
+                  {absencesWithDetail.map((absence, index) => (
+                    <AbsenceCard
+                      key={index}
+                      studentName={absence.studentName}
+                      sessionName={absence.sessionName}
+                      onClick={() => openAbsenceModal(absence)}
+                      className="flex-1"
+                    />
+                  ))}
                 </div>
               </div>
             </div>
