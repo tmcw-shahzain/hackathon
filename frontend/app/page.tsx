@@ -229,7 +229,7 @@ export default function Dashboard() {
                     {todaysSessions.map((session, index) => (
                       <Link
                         key={session.id}
-                        href={`/timetable?session=${session.id}`}
+                        href={`/session/${session.id}`}
                         className="block bg-muted/50 rounded-lg p-2.5 hover:shadow-md hover:-translate-y-0.5 transition-all"
                       >
                         <div className="flex items-center gap-3">
@@ -256,20 +256,24 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                {/* Recent Activity */}
+                {/* Past Sessions */}
                 <div className="bg-card border border-border rounded-lg overflow-hidden">
                   <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-                    <h2 className="text-base font-bold">Recent Activity</h2>
+                    <h2 className="text-base font-bold">Past Sessions</h2>
                     <Link href="/timetable?past=1" className="text-xs font-medium text-blue-600 hover:opacity-80">
                       View All →
                     </Link>
                   </div>
                   <div className="p-3">
                     {pastSessions.slice(0, 2).map((session) => (
-                      <div key={session.id} className="py-2.5 border-b border-border last:border-0">
+                      <Link
+                        key={session.id}
+                        href={`/session/${session.id}`}
+                        className="block py-2.5 border-b border-border last:border-0 hover:bg-muted/30 rounded transition-colors"
+                      >
                         <div className="font-semibold text-xs mb-0.5">{session.moduleName}</div>
                         <div className="text-[10px] text-muted-foreground">{session.date} • {session.duration} • 8 students</div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
