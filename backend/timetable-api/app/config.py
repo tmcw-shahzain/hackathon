@@ -1,8 +1,11 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
+from dotenv import load_dotenv
 
-class Settings(BaseSettings):
-    mongodb_url: str
+# Load environment variables from .env file
+load_dotenv()
 
-    model_config = SettingsConfigDict(env_file=".env")
+class Settings:
+    def __init__(self):
+        self.mongodb_url = os.getenv("MONGODB_URL", "mongodb://localhost:27017")
 
 settings = Settings()
